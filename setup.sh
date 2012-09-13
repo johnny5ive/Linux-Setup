@@ -116,6 +116,6 @@ git config --global credential.helper cache
 git config --global credential.helper 'cache --timeout=3600'
 
 echo -e $red$bold"\Executing Rails Setup\n"$reset
-./RailsSetup.sh
+wget -qO- https://github.com/johnny5ive/Rails-Setup/blob/master/RailsSetup.sh | sh
 
 echo -e $red$bold"\Script Completed!\n"$reset
