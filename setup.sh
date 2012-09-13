@@ -1,7 +1,5 @@
 #!/bin/bash
-# Johnny5ive's Debian/Ubuntu/Mint setup script.
-
-#TODO: Add-Prelink instructions from http://ubuntuforums.org/showthread.php?t=74197  
+# Johnny5ive's Debian/Ubuntu/Mint setup script. 
 
 # Text color variables
 und=$(tput sgr 0 1)          		# Underline
@@ -41,29 +39,25 @@ if [ ${MACHINE_TYPE} == 'x86_64' ]; then
 	mv amd-driver-installer-8.982-x86.x86_64.run amd-driver-installer.run
 
  	echo -e $red'\nDownloading Chrome'
-	wget -c "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
-	mv google-chrome-stable_current_amd64.deb google-chrome-stable_current.deb
+	wget -cO chrome.deb "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
 
 	echo -e $red'\nDownloading Sublime Text'
 	wget -c "http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%202.0.1%20x64.tar.bz2"
 	tar -xf "Sublime Text 2.0.1 x64.tar.bz2"
 
 	echo -e $red'\nDownloading Dropbox'
-	wget -c "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_1.4.0_amd64.deb"
-	mv "download?dl=packages%2Fubuntu%2Fdropbox_1.4.0_amd64.deb" "dropbox_1.4.0.deb"
+	wget -cO dropbox.deb "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_1.4.0_amd64.deb"
 else
-  	# 32-bit stuff here
-  	echo -e $red'\nDownloading Chrome'
-  	wget -c "https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb"
-  	mv google-chrome-stable_current_i386.deb google-chrome-stable_current.deb
+	# 32-bit stuff here
+	echo -e $red'\nDownloading Chrome'
+	wget -cO chrome.deb "https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb"
 
 	echo -e $red'\nDownloading Sublime Text'
 	wget -c "http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%202.0.1.tar.bz2"
 	tar -xf "Sublime Text 2.0.1.tar.bz2"
 
 	echo -e $red'\nDownloading Dropbox'
-	wget -c "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_1.4.0_i386.deb"
-	mv "download?dl=packages%2Fubuntu%2Fdropbox_1.4.0_i385.deb" "dropbox_1.4.0.deb"
+	wget -cO dropbox.deb "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_1.4.0_i386.deb"
 fi
 
 sudo sh <<SCRIPT
@@ -82,11 +76,11 @@ sudo dpkg -i ubuntu-tweak_0.7.3-1~precise1_all.deb
 
 # Chrome
 echo -e $red'\nInstalling Google Chrome'
-sudo dpkg -i google-chrome-stable_current.deb
+sudo dpkg -i chrome.deb
 
 # Dropbox
 echo -e $red'\nInstalling Dropbox'
-sudo dpkg -i "dropbox_1.4.0.deb" 
+sudo dpkg -i "dropbox.deb" 
 echo -e $red'\nFixing Dropbox monitoring limit'
 echo -e $red fs.inotify.max_user_watches=100000 | sudo tee -a /etc/sysctl.conf; sudo sysctl -p
 
@@ -94,11 +88,10 @@ echo -e $red fs.inotify.max_user_watches=100000 | sudo tee -a /etc/sysctl.conf; 
 echo -e $red'\nInstalling Sublime'
 sudo mv Sublime\ Text\ 2 /opt/
 sudo ln -s /opt/Sublime\ Text\ 2/sublime_text /usr/bin/sublime
+sudo sed -i 's/gedit.desktop/sublime.desktop/g' /usr/share/applications/defaults.list
 
 echo -e $red '\nPaste step 4'
-xdg-open "http://www.technoreply.com/how-to-install-sublime-text-2-on-ubuntu-12-04-unity/"
-sudo sublime /usr/share/applications/sublime.desktop
-sudo chown -R $USER:$USER ~/.config/sublime-text-2/
+sudo wget -O /usr/share/applications/sublime.desktop https://github.com/johnny5ive/Linux-Setup/blob/master/sublime.desktop
 
 # PreLinker
 echo -e $red'\nSetting up PreLinker'
