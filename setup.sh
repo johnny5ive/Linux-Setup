@@ -4,8 +4,8 @@
 #TODO: Add-Prelink instructions from http://ubuntuforums.org/showthread.php?t=74197  
 
 # Text color variables
-und=$(tput sgr 0 1)          	# Underline
-bold=$(tput bold)            	# Bold
+und=$(tput sgr 0 1)          		# Underline
+bold=$(tput bold)            		# Bold
 red=${txtbld}$(tput setaf 1)    # Red
 reset=$(tput sgr0)              # Reset
 
@@ -23,10 +23,6 @@ echo -e $red$bold"Downloading pre-requisite files.\n"$reset
 
 echo -e $red'\nDownloading Ubuntu Tweak'
 wget -c "https://launchpad.net/ubuntu-tweak/0.7.x/0.7.3/+download/ubuntu-tweak_0.7.3-1~precise1_all.deb"
-
-echo -e $red'\nDownloading Ruby'
-wget -c http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p194.tar.gz
-tar -xzf ruby-1.9.3-p194.tar.gz
 
 echo -e $red'\nDownloading themes'
 wget -c http://www.deviantart.com/download/288398137/omg_suite_by_nale12-d4rpdfd.zip
