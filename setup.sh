@@ -14,7 +14,6 @@ echo -e $red$bold"Starting script. Let's begin!\n"$reset
 echo -e $red'Creating directories\n'$reset
 mkdir ~/usr
 mkdir ~/.themes
-mkdir ~/.temp && cd ~/.temp
 
 # Downloading required files.
 echo -e $red$bold"Downloading pre-requisite files.\n"$reset
@@ -91,7 +90,7 @@ sudo ln -s /opt/Sublime\ Text\ 2/sublime_text /usr/bin/sublime
 sudo sed -i 's/gedit.desktop/sublime.desktop/g' /usr/share/applications/defaults.list
 
 echo -e $red '\nPaste step 4'
-sudo wget -O /usr/share/applications/sublime.desktop https://github.com/johnny5ive/Linux-Setup/blob/master/sublime.desktop
+sudo mv sublime.desktop /usr/share/applications/sublime.desktop
 
 # PreLinker
 echo -e $red'\nSetting up PreLinker'
@@ -116,6 +115,8 @@ git config --global credential.helper cache
 git config --global credential.helper 'cache --timeout=3600'
 
 echo -e $red$bold"\Executing Rails Setup\n"$reset
-wget -qO- https://github.com/johnny5ive/Rails-Setup/blob/master/RailsSetup.sh | sh
+git clone https://github.com/johnny5ive/Rails-Setup.git 
+chmod +x Rails-Setup/RailsSetup.sh
+./Rails-Setup/RailsSetup.sh
 
 echo -e $red$bold"\Script Completed!\n"$reset
