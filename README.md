@@ -1,0 +1,1 @@
+git clone https://github.com/johnny5ive/Linux-Setup.git && chmod +x Linux-Setup/setup.sh && ./Linux-Setup/setup.sh
